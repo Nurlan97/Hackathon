@@ -22,6 +22,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from main import chat
+
 schema_view = get_schema_view(
    openapi.Info(
       title="API Docs",
@@ -40,6 +42,7 @@ urlpatterns = [
     path('api/v1/songs/', include('main.urls')),
     path('api/v1/account/', include('account.urls')),
     path('api/v1/cart/', include('cart.urls')),
+    # path('chat/', include('main.urls')),
 
 
     # path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

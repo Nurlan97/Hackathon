@@ -40,8 +40,8 @@ class LoginSerializer(TokenObtainPairSerializer):
             refresh = self.get_token(user)
             attrs['refresh'] = str(refresh)
             attrs['access'] = str(refresh.access_token)
-        # else:
-        #     raise serializers.ValidationError('Invalid password!')
+        else:
+            raise serializers.ValidationError('Invalid password!')
 
         return attrs
 

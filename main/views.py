@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 # from rest_framework.generics import GenericAPIView
 
-from main import serializers
+from main import serializers, music_player
 from main.models import Song, Category, Review, Likes
 from main.permissions import IsAuthor
 from main.serializers import SongSerializer
@@ -43,7 +43,7 @@ class SongListView(generics.ListAPIView):
     pagination_class = StandartPaginationClass
     filter_backends = (DjangoFilterBackend, SearchFilter)
     filterset_fields = ('owner', 'category')
-    search_fields = ('title',)
+    search_fields = ('name',)
 
 class SongDetailView(generics.RetrieveAPIView):
     queryset = Song.objects.all()
@@ -109,7 +109,29 @@ def remove_from_liked(request, pk):
     request.user.liked.filter(song=song).delete()
     return Response('Убрано из списка понравившийся', status=status.HTTP_204_NO_CONTENT)
 
-#
+
+@api_view(['POST'])
+def add_to_favourite(request, pk):
+    song = Song.objects.get(id=pk)
+    if request.user.favourite.filter(song=song).exists():
+        return Response('Этот пост у вас уже в Избранном', status=status.HTTP_400_BAD_REQUEST)
+    Likes.objects.create(song=song, user=request.user)
+    return Response('Добавлено в Избранные', status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def remove_from_favourite(request, pk):
+    song = Song.objects.get(id=pk)
+    if not request.user.favourite.filter(song=song).exists():
+        return Response('Данный пост отсутствует в списке избранных',status=status.HTTP_400_BAD_REQUEST)
+    request.user.liked.filter(song=song).delete()
+    return Response('Убрано из списка избранных', status=status.HTTP_204_NO_CONTENT)
+
+
+# music_player()
+
+
+
 #
 # def playsong():
 #     currentsong=playlist.get(ACTIVE)
@@ -165,3 +187,5 @@ def remove_from_liked(request, pk):
 #
 #
 # mainloop()
+
+

@@ -41,3 +41,11 @@ class Likes(models.Model):
     class Meta:
         unique_together = ['song', 'user']
 
+
+
+class Favourites(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='favourites')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='favourite')
+
+    class Meta:
+        unique_together = ['song', 'user']
