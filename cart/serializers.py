@@ -10,8 +10,8 @@ class OrderSerializer(serializers.Serializer):
     def validate(self, attrs):
         data = {}
         try:
-            product = Product.objects.get(pk=attrs['product'])
-        except Product.DoesNot.Exist:
+            product = Song.objects.get(pk=attrs['product'])
+        except Song.DoesNot.Exist:
             raise serializers.ValidationError('Failed to find the product')
         count = attrs['count']
         data['count'] = count
@@ -21,8 +21,8 @@ class OrderSerializer(serializers.Serializer):
     def save(self, **kwargs):
         data = self.validated_data
         user = kwargs['user']
-        product = Product.objects.get(pk=data['product'])
+        song = Song.objects.get(pk=data['song'])
         Order.objects.create(
-            product=product,
+            song=song,
             user=user,
             count=data['count'],)

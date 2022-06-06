@@ -41,7 +41,7 @@ class LoginSerializer(TokenObtainPairSerializer):
             attrs['refresh'] = str(refresh)
             attrs['access'] = str(refresh.access_token)
         # else:
-        #     raise serializers.py.ValidationError('Invalid password!')
+        #     raise serializers.ValidationError('Invalid password!')
 
         return attrs
 
@@ -101,4 +101,3 @@ class LogoutSerializer(serializers.Serializer):
             RefreshToken(self.token).blacklist()
         except TokenError:
             self.fail('bad_token')
-        return

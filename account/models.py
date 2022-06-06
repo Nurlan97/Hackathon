@@ -46,7 +46,10 @@ class CustomUser(AbstractUser):
     is_active = models.BooleanField(
         _('active'),
         default = False,
-        help_text = _('Designates whether this user should be treated as active.' 'Unselect this instead of deleting accounts.')
+        help_text = _(
+            'Designates whether this user should be treated as active.' 
+            'Unselect this instead of deleting accounts.'
+        )
     )
     def __str__(self) -> str:
         return self.email

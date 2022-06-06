@@ -5,8 +5,9 @@ from main.models import Song, Category, Review
 
 
 class SongSerializer(serializers.ModelSerializer):
-    owner = ReadOnlyField(source='owner.username')
-    recalls = PrimaryKeyRelatedField(many=True, read_only=True)
+    owner = ReadOnlyField(source='owner.email')
+    reviews = PrimaryKeyRelatedField(many=True, read_only=True)
+
 
     class Meta:
         model = Song
@@ -18,7 +19,7 @@ class SongSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['recalls_detail'] = ReviewSerializer(instance.recalls.all(), many=True).data
+        representation['reviews_detail'] = ReviewSerializer(instance.reviews.all(), many=True).data
         user = self.context.get('request').user
         if user.is_authenticated:
             representation['is_liked'] = self.is_liked(instance)
@@ -33,9 +34,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    owner = ReadOnlyField(source='owner.username')
+    owner = ReadOnlyField(source='owner.email')
 
     class Meta:
         model = Review
-        fields = ('id', 'body', 'owner', 'product')
+        fields = ('id', 'body', 'owner', 'song')
 
