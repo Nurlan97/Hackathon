@@ -5,6 +5,8 @@
 #
 #
 #
+#
+#
 # def playsong():
 #     currentsong=playlist.get(ACTIVE)
 #     print(currentsong)
@@ -59,3 +61,22 @@
 #
 
 # mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

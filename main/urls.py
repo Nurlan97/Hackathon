@@ -20,13 +20,7 @@ urlpatterns = [
     path('reviews/', views.ReviewListCreateView.as_view()),
     path('reviews/<int:pk>/', views.ReviewDetailView.as_view()),
     # path('music_player/', views.music_player())
-    # path('', chat.Chat)
-    #
-    # path('music_player/playsong/', music_player.playsong),
-    # path('music_player/pausesong/', music_player.pausesong),
-    # path('music_player/stopsong/', music_player.stopsong),
-    # path('music_player/resumesong/', music_player.resumesong),
-
+    # path('music_player/', views.ParsingView.as_view()),
 
 ]
 

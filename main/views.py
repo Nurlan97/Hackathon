@@ -1,3 +1,5 @@
+from tkinter import mainloop
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -14,6 +16,7 @@ from main import serializers, music_player
 from main.models import Song, Category, Review, Likes
 from main.permissions import IsAuthor
 from main.serializers import SongSerializer
+# from main.music_player import a
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -128,7 +131,21 @@ def remove_from_favourite(request, pk):
     return Response('Убрано из списка избранных', status=status.HTTP_204_NO_CONTENT)
 
 
-# music_player()
+# class ParsingView(APIView):
+#     def get(self, request):
+#         parsing = mainloop()
+#
+#         # serializer = ParsingSerializer(instance = parsing, many=True)
+#         return Response(parsing)
+#
+# class ChatView(APIView):
+#     def get(self, request):
+#         chat = chat()
+
+# # music_player()
+# def play(self):
+#     self = a
+#
 
 
 

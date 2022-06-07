@@ -18,6 +18,7 @@ class Song(models.Model):
     owner = models.ForeignKey(CustomUser, related_name='songs', on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, related_name='songs', on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
+    audio = models.FileField(upload_to='audio', null=True, blank=True)
 
 
     def __str__(self):
