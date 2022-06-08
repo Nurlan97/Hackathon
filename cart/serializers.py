@@ -4,18 +4,18 @@ from cart.models import Order
 
 
 class OrderSerializer(serializers.Serializer):
-    product = serializers.IntegerField()
+    song = serializers.IntegerField()
     count = serializers.IntegerField()
 
     def validate(self, attrs):
         data = {}
         try:
-            product = Song.objects.get(pk=attrs['product'])
+            song = Song.objects.get(pk=attrs['song'])
         except Song.DoesNot.Exist:
             raise serializers.ValidationError('Failed to find the product')
         count = attrs['count']
         data['count'] = count
-        data['product'] = product.pk
+        data['song'] = song.pk
         return data
 
     def save(self, **kwargs):

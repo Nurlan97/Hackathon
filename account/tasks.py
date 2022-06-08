@@ -11,7 +11,7 @@ def send_activation_code(to_email, code):
     full_link = f'http://localhost:8000/api/v1/account/activate/{code}/'
     # to_email = user.email
     send_mail(
-        'ЗдравствуйтеЮ активируйте ваш аккаунт ',
+        'Здравствуйте, активируйте ваш аккаунт! ',
         f'Для того чтобы активироват ваш аккаунт нужно перейти по ссылке: {full_link}',
         'from@example.com',
         [to_email, ],

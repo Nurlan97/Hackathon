@@ -4,6 +4,7 @@ from main.models import Song
 
 
 class Order(models.Model):
+
     user = models.ForeignKey(CustomUser, related_name='user', on_delete=models.CASCADE)
     song = models.ForeignKey(Song, related_name='song', on_delete=models.DO_NOTHING,)
     count = models.IntegerField()
